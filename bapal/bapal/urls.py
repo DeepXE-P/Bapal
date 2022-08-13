@@ -20,4 +20,5 @@ from bapal_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test_view),
+    path('api/Test/', views.TestListAPI.as_view()),
 ]
