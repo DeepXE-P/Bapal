@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import Test
 from rest_framework.views import APIView
 from .serializers import TestSerializer
+from rest_framework import status
 
 # Create your views here.
 class TestListAPI(APIView):
@@ -12,6 +13,15 @@ class TestListAPI(APIView):
         print(queryset)
         serializer=TestSerializer(queryset, many=True)
         return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TestSerializer(data = request.data)
+
+        if serializer.is_valid():
+            serializer.save() # 저장하는 구문
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        else:
+            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 def test_view(request):
     tests = Test.objects.all()
