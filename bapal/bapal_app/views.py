@@ -23,7 +23,7 @@ class TestListAPI(APIView):
         else:
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(request, pk):
+    def delete(self, request, pk):
         queryset = bapal_app.objects.get(id=pk) #delete 구현
         queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
