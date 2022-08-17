@@ -15,7 +15,7 @@ class TestListAPI(APIView):
         return Response(serializer.data)
 
     def post(self, request, pk):
-        serializer = TestSerializer(data = request.data)
+        serializer = TestSerializer(data = request.data, many=True)
 
         if serializer.is_valid():
             serializer.save() # 저장하는 구문
