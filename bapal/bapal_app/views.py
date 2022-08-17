@@ -8,13 +8,13 @@ from rest_framework import status
 # Create your views here.
 
 class TestListAPI(APIView):
-    def get(self, request):
+    def get(self, request, pk):
         queryset=Test.objects.all()
         print(queryset)
         serializer=TestSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
+    def post(self, request, pk):
         serializer = TestSerializer(data = request.data)
 
         if serializer.is_valid():
